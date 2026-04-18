@@ -52,6 +52,22 @@ OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
 client = OpenAI(   base_url="https://openrouter.ai/api/v1", api_key=OPENROUTER_API_KEY);
 
 
+def is_rate_limit_error(err: Exception) -> bool:
+    error_text = str(err).lower()
+    return (
+        "429" in error_text
+        or "rate limit" in error_text
+        or "free-models-per-day" in error_text
+    )
+
+
+def apply_ai_fallback(job_details, reason: str):
+    job_details["Skills"] = []
+    job_details["Experience"] = "N/A"
+    job_details["Recommendation"] = "Skipped"
+    job_details["Notes"] = reason
+
+
 def get_genai_resp(prompt, client):
     response = client.responses.create(
     model="nvidia/nemotron-nano-9b-v2:free",
@@ -115,7 +131,7 @@ Applicants may be required to attend interviews in person or by video conference
         WebDriverWait(driver, 10).until(
             EC.presence_of_element_located((By.CSS_SELECTOR, "ul.job-meta"))
         )
-        
+        # breakpoint()
         soup = BeautifulSoup(driver.page_source, 'html.parser')
         data = {'URL': url}
         
@@ -154,6 +170,8 @@ Applicants may be required to attend interviews in person or by video conference
 import random
 
 def scrape_cognizant_jobs(max_pages=2):
+    ai_available = bool(OPENROUTER_API_KEY)
+    ai_unavailable_reason = "OPENROUTER_API_KEY is not set" if not ai_available else ""
     options = uc.ChromeOptions()
     # options.add_argument("--headless") # Headless mode detected/blocked by site
     # options.add_argument("--window-size=1920,1080")
@@ -200,6 +218,7 @@ def scrape_cognizant_jobs(max_pages=2):
                 continue
                 
             # Extract job links from the current listing page
+            # breakpoint()
             soup = BeautifulSoup(driver.page_source, 'html.parser')
             job_cards = soup.select('div.card-job')
             
@@ -224,22 +243,32 @@ def scrape_cognizant_jobs(max_pages=2):
                 print(f"  Scraping job {i+1}/{len(page_links)}: {link}")
                 # breakpoint()
                 job_details = get_job_details(driver, link)
-                recommend = get_resume_recommendation(job_details['Description'], client)
-                # breakpoint()
-                #job_details['Description']
-                # v1=json.loads(response.output_text)
-                # job_details['key_words'] = v1['key_words']
-                # job_details['Description'] = v1['Description']
-                
-                jd_prompt = prompt+job_details['Description']
+                if ai_available:
+                    try:
+                        recommend = get_resume_recommendation(job_details['Description'], client)
+                        jd_prompt = prompt + job_details['Description']
 
-                ai_resp = get_genai_resp(jd_prompt, client)
-                job_details['Skills'] = ai_resp['key_words']
-                job_details['Experience'] = ai_resp['experience']
-                job_details['Recommendation'] = recommend.get('Recommendation',"No data") 
-                if recommend.get('Recommendation',"No data") == 'High' :
-                    print("*"*10, "High match with ", link)
-                job_details['Notes'] = recommend.get('Notes', "No Data")
+                        ai_resp = get_genai_resp(jd_prompt, client)
+                        job_details['Skills'] = ai_resp.get('key_words', [])
+                        job_details['Experience'] = ai_resp.get('experience', 'No Data')
+                        job_details['Recommendation'] = recommend.get('Recommendation', "No data")
+                        if recommend.get('Recommendation', "No data") == 'High':
+                            print("*" * 10, "High match with ", link)
+                        job_details['Notes'] = recommend.get('Notes', "No Data")
+                    except Exception as ai_err:
+                        if is_rate_limit_error(ai_err):
+                            ai_available = False
+                            ai_unavailable_reason = (
+                                "OpenRouter free-tier daily quota exceeded; AI skipped for remaining jobs"
+                            )
+                            print(f"AI quota reached: {ai_err}")
+                            print("Disabling AI processing for the rest of this run.")
+                            apply_ai_fallback(job_details, ai_unavailable_reason)
+                        else:
+                            print(f"AI Processing Error: {ai_err}")
+                            apply_ai_fallback(job_details, f"AI error: {ai_err}")
+                else:
+                    apply_ai_fallback(job_details, ai_unavailable_reason)
 
                 all_job_data.append(job_details)
                 
