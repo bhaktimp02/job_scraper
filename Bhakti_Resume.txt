@@ -1,0 +1,66 @@
+Some Person
+Python Developer | Data Engineer
+
+
+Professional Summary
+Experienced Python Developer with 10+ years of expertise in designing and building scalable backend applications, developing automation frameworks, and creating data processing systems. Strong expertise in Python, Flask/Django, SQL, and cloud based deployments. Proven track record in designing high-volume data processing systems, optimizing performance and implementing compliance driven data workflows. 
+Skilled in developing AI-powered solutions using LLMs (OpenAI GPT), including intelligent data extraction, semantic matching, and workflow automation. Adept at leveraging AI-assisted development tools to accelerate delivery, improve    code quality, and enhance system reliability.
+Technical Skills
+Languages: Python, SQL, JavaScript
+Frameworks: Flask, Django
+Libraries: Pandas, NumPy, SciPy, Matplotlib
+Databases: MySQL, PostgreSQL, Oracle, SQL Server, MongoDB, Collibra
+Data & Messaging: Kafka, Impala
+AI/Machine Learning: Large Language Models(LLMs), Prompt Engineering, Semantic Matching
+Cloud: Azure (VM, application deployment)
+Tools: Git, Docker, Jira, PyCharm, Jupyter
+AI Development Tools: GitHub Copilot, Cursor AI Editor, Claude, Gemini
+Operating Systems: Linux/Unix, Windows, macOS
+Projects
+AI-Powered Job Matching System
+
+Developed a Python-based web scraper to aggregate job listings from online sources
+Leveraged OpenAI LLMs to extract key skills, qualifications, and requirements from unstructured job descriptions
+Designed a matching algorithm to compare my profile with job requirements and identify best-fit opportunities
+Improved job relevance scoring by automating skill extraction and semantic matching
+Utilized prompt engineering to improve accuracy of structured data extraction from raw text
+
+Professional Experience
+Company1 | Full Stack Developer
+Jul 2021 – Present
+Developed full-stack web applications using Python (Flask), SQL, HTML, CSS, and JavaScript for enterprise recruiting platforms capable of handling high-volume candidate and job data.
+Built automation scripts to process and manage large datasets and application workflows.
+Designed and implemented interactive UI components using HTML, CSS, and JavaScript to support job posting management and candidate tracking workflows.
+Built RESTful APIs using Python and SQLAlchemy to facilitate communication between frontend interfaces and backend services.
+Developed backend services and database queries with Python and SQL to manage application and candidate data exceeding 1M+ records.
+Integrated third-party APIs to enhance platform capabilities and support external system integrations.
+Implemented reports and analytics features to provide operational insights and monitor platform performance.
+Led the upgrade of Python applications from version 3.7 to 3.10, resulting in improved system performance, compatibility, and security.
+Participated in the decommissioning of the HireIn platform, migrating critical functionality and ensuring a smooth transition of services.
+Coordinated data collection initiatives and strategically planned the deletion process in collaboration with the Data Warehouse (DWH) team and third-party vendors, including HackerRank and CoderPad. Designed and implemented automation scripts to facilitate secure and compliant data deletion, efficiently removing all obsolete records according to enterprise retention policies and GDPR regulations.
+Implemented audit logging and validation mechanisms to track deletion activities and ensure compliance with governance policies.
+Optimized batch database operations to efficiently process hundreds of thousands to millions of records.
+Collaborated with cross-functional teams to validate retention rules and deploy automation solutions in production environments.
+Utilized AI development tools including GitHub Copilot, Cursor, Claude, and Gemini to accelerate coding, refactoring, debugging, and documentation.
+Participated in Agile development processes including sprint planning, stand-ups, and retrospectives.
+Conducted code reviews and contributed to maintaining high code quality and development standards.
+Played a key role in onboarding and mentoring new team members, providing technical guidance and supporting their integration into the team.
+Coordinated with cross-functional teams across multiple time zones (PST, EST, IST), maintaining strong communication and meeting project deadlines in a remote environment.
+Company2 | Python Developer / Data Engineer
+Jan 2019 – Jun 2021
+Developed backend services and web applications using Python, Flask, REST API, and SQLAlchemy.
+Created data processing scripts and automated workflows for data extraction and transformation.
+Implemented automation scripts in Bash and Python for encryption, secure data transfer, and system integration.
+Developed Python scripts to parse JSON data and load information into relational databases.
+Built Kafka producers and consumers to support real-time data streaming pipelines.
+Utilized Collibra and Kafka to support data governance processes and automate data processing workflows.
+Company3 | Python Developer / Data Engineer
+Oct 2016 – Dec 2018
+Designed real-time data pipelines using Python, Kafka, and Snowflake.
+Built ETL workflows to ingest, clean, and transform data from diverse enterprise sources.
+Developed RESTful APIs using Flask and SQLAlchemy for application integration.
+Improved application performance by refactoring ORM structures and optimizing database queries.
+Earlier Experience
+Held Python Developer roles at Company4, focusing on automation scripting, web application development, data analysis, and API development.
+Education
+Bachelor of Science – Guru Jambheshwar University of Science and Technology, India

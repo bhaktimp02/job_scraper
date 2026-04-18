@@ -1,0 +1,14 @@
+[project]
+name = "cognizant-demo"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "bs4>=0.0.2",
+    "openai>=2.32.0",
+    "openpyxl>=3.1.5",
+    "pandas>=2.3.3",
+    "selenium>=4.37.0",
+    "undetected-chromedriver>=3.5.5",
+]
